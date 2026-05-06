@@ -155,15 +155,3 @@ Dashboard design and development by **Victor**, **Prathamesh**, **Yunkwang**, an
 Narrative, strategy, and presentation by **Benjamin**.
 
 ---
-
-## 📅 Project Timeline
-
-| Milestone | Due Date | Status |
-|-----------|----------|--------|
-| Dataset chosen | 19 Apr 2026 | ✅ Done |
-| Dataset reviewed & insights | 26 Apr 2026 | ✅ Done |
-| Story & narrative defined | 29 Apr 2026 | ✅ Done |
-| Visuals chosen & mock-up | 5 May 2026 | ✅ Done |
-| Prototype in Streamlit | 11 May 2026 | 🔄 In Progress |
-| Presentation | 13 May 2026 | ⏳ Upcoming |
-| Final submission | 19 May 2026 | ⏳ Upcoming |
