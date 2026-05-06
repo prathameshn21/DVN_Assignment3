@@ -17,8 +17,11 @@ def show_navigation(current: int, total: int):
 
     col1, col2, col3 = st.columns([1, 4, 1])
     with col1:
-        if current > 1:
-            if st.button("← Prev"):
+        if current == 1:
+            if st.button("← Prev", key=f"prev_{current}"):
+                st.switch_page("app.py")
+        elif current > 1:
+            if st.button("← Prev", key=f"prev_{current}"):
                 st.switch_page(page_files[current - 2])
     with col2:
         st.markdown(
@@ -28,6 +31,6 @@ def show_navigation(current: int, total: int):
         )
     with col3:
         if current < total:
-            if st.button("Next →"):
+            if st.button("Next →", key=f"next_{current}"):
                 st.switch_page(page_files[current])
     st.markdown("---")
