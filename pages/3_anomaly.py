@@ -87,7 +87,11 @@ with col_chile:
         <div class='comparison-card-green'>
             <div class='card-country-green'>Chile (the proof)</div>
             <div class='card-big-number'>{chile_share}</div>
-            <div class='card-sub'>solar share &nbsp;·&nbsp; PVOUT {chile_pvout}</div>
+            <div style='font-size:1.4rem; font-weight:700; 
+                        color:#27AE60; margin-top:8px;'>
+                PVOUT {chile_pvout}
+            </div>
+            <div class='card-sub'>solar share &nbsp;·&nbsp; kWh/kWp/day</div>
         </div>
     """, unsafe_allow_html=True)
 with col_gap:
@@ -99,7 +103,11 @@ with col_saudi:
         <div class='comparison-card-red'>
             <div class='card-country-red'>Saudi Arabia (the gap)</div>
             <div class='card-big-number'>{saudi_share}</div>
-            <div class='card-sub'>solar share &nbsp;·&nbsp; PVOUT {saudi_pvout}</div>
+            <div style='font-size:1.4rem; font-weight:700; 
+                        color:#E74C3C; margin-top:8px;'>
+                PVOUT {saudi_pvout}
+            </div>
+            <div class='card-sub'>solar share &nbsp;·&nbsp; kWh/kWp/day</div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -223,14 +231,25 @@ fig.update_layout(
     paper_bgcolor="white",
     hovermode="closest"
 )
+st.markdown("""
+    <div style='font-size:0.82rem; color:#888; margin-bottom:8px;'>
+        ⬤ &nbsp; Bubble size represents 
+        <strong>electricity demand (TWh)</strong> — 
+        larger bubble = larger energy market
+    </div>
+""", unsafe_allow_html=True)
 
 st.plotly_chart(fig, use_container_width=True)
 
 # ── Insight Box ───────────────────────────────────────────────────────────────
 st.markdown("""
     <div class='insight-box'>
-        The bottom-right quadrant — <strong>high sun, low adoption</strong> — is where
-        opportunity lives. These countries can replicate Chile's trajectory now that
+        <div style='font-size:1.2rem; font-weight:800; color:#1A1A1A; 
+                    margin-bottom:10px; line-height:1.5;'>
+            The bottom-right quadrant — high sun, low adoption —
+            is where opportunity lives.
+        </div>
+        These countries can replicate Chile's trajectory now that
         module prices are universal at <strong>$0.26/W</strong>.
         The gap is investment, policy, and grid infrastructure —
         exactly what <strong>Canadian Solar</strong> provides.

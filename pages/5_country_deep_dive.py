@@ -30,15 +30,27 @@ merged = load_merged()
 # ADVANCED FEATURE 1: Country selector — updates all visuals below
 selected = st.selectbox("Select a target country:", TARGET)
 row = opp[opp["country"] == selected].iloc[0]
-
+opp_sorted = opp.sort_values("opportunity_score", ascending=False).reset_index()
+rank = opp_sorted[opp_sorted["country"] == selected].index[0] + 1
+total_countries = len(opp_sorted)
 # Metric row
 m1, m2, m3, m4 = st.columns(4)
-m1.metric("Solar Share",   f"{row['solar_share_elec']:.1f}%")
-m2.metric("PVOUT",         f"{row['pvout_kwh_kwp_day']:.2f} kWh/kWp/d")
-m3.metric("5yr CAGR",      f"{row['solar_cagr_5yr']*100:.0f}%")
-m4.metric("Installed GW",  f"{row['installed_capacity_gw']:.1f} GW")
-
+m1.metric("Solar Share",  f"{row['solar_share_elec']:.1f}%",
+          f"Rank #{rank} of {total_countries}")
+m2.metric("PVOUT",        f"{row['pvout_kwh_kwp_day']:.2f}",
+          "kWh/kWp/day")
+m3.metric("5yr CAGR",     f"{row['solar_cagr_5yr']*100:.0f}%",
+          "2019–2024")
+m4.metric("Installed GW", f"{row['installed_capacity_gw']:.1f} GW",
+          "2024")
 st.markdown("<br>", unsafe_allow_html=True)
+st.info(
+    "💡 **Why these 4 countries?** Higher-scoring markets like Oman, Kuwait, "
+    "and China were excluded from target recommendations due to market access "
+    "constraints — Canadian Solar already has significant China exposure, while "
+    "Oman and Kuwait have smaller addressable market sizes relative to "
+    "deployment risk."
+)
 
 col_left, col_right = st.columns(2)
 

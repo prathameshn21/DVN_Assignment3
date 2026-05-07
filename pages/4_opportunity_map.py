@@ -36,6 +36,15 @@ metric = st.selectbox(
         "electricity_demand":   "Electricity Demand (TWh)",
     }[x]
 )
+with st.expander("ℹ️ What do these metrics mean?"):
+    st.markdown("""
+    | Metric | What it means |
+    |--------|--------------|
+    | **PVOUT** | Practical solar output — kWh a 1kWp system produces per day. Higher = better natural conditions |
+    | **Solar Share (%)** | % of a country's electricity that comes from solar. Low = more room to grow |
+    | **5yr CAGR** | Compound annual growth rate of solar generation 2019–2024. High = strong momentum |
+    | **Opportunity Score** | Composite score combining all above metrics + demand + GDP |
+    """)
 
 # Choropleth map — hover shows full stats (ADVANCED FEATURE 2: Tooltips)
 fig_map = px.choropleth(
@@ -50,7 +59,14 @@ fig_map = px.choropleth(
         "opportunity_score":  ":.3f",
         "iso_code":           False,
     },
-    color_continuous_scale="YlOrRd",
+    color_continuous_scale=[
+    [0.0,  "#A8DADC"],   # light aqua — low score
+    [0.3,  "#70C1B3"],   # teal
+    [0.5,  "#F4D35E"],   # yellow
+    [0.7,  "#F28C28"],   # orange
+    [1.0,  "#E8351C"],   # strong red-orange — high score
+],
+
     projection="natural earth",
 )
 fig_map.update_layout(
@@ -63,20 +79,37 @@ st.plotly_chart(fig_map, use_container_width=True)
 
 # Top 15 bar chart — updates based on same metric filter
 st.markdown(f"**Top 15 countries by {metric.replace('_',' ').title()}**")
+TARGET = ["Saudi Arabia", "Egypt", "Colombia", "Pakistan"]
 top15 = opp.nlargest(15, metric)
+top15["is_target"] = top15["country"].isin(TARGET)
 fig_bar = px.bar(
     top15.sort_values(metric),
     x=metric, y="country",
     orientation="h",
     color=metric,
-    color_continuous_scale="YlOrRd",
+    color_continuous_scale=[
+    [0.0,  "#A8DADC"],
+    [0.3,  "#70C1B3"],
+    [0.5,  "#F4D35E"],
+    [0.7,  "#F28C28"],
+    [1.0,  "#E8351C"],
+],
     hover_data=["solar_share_elec", "pvout_kwh_kwp_day", "solar_cagr_5yr"],
 )
 fig_bar.update_layout(
     template="plotly_white",
-    height=420,
+    height=340,
     showlegend=False,
     margin=dict(l=120, r=20, t=10, b=40),
     coloraxis_showscale=False
 )
 st.plotly_chart(fig_bar, use_container_width=True)
+st.markdown("""
+    <div style='font-size:0.78rem; color:#999; margin-top:-16px; 
+                margin-bottom:24px; padding-left:4px;'>
+        ℹ️ &nbsp; <strong>Opportunity Score</strong> is a weighted composite: 
+        Solar Resource PVOUT (25%) · Untapped Market Share (25%) · 
+        Electricity Demand (20%) · 5-yr Growth Rate CAGR (20%) · 
+        GDP per Capita (10%)
+    </div>
+""", unsafe_allow_html=True)

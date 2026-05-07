@@ -53,7 +53,7 @@ with col1:
         <div style='background:#FDF6EC; border-radius:12px; padding:28px; text-align:center;'>
             <div style='font-size:2rem;'>💰</div>
             <h4 style='color:#E8721C;'>Price</h4>
-            <p style='color:#555; font-size:0.9rem;'>
+            <p style='color:#555; font-size:1.05rem; line-height:1.6;'>
                 Solar is now the cheapest electricity source in 85% of the world
             </p>
         </div>
@@ -63,7 +63,7 @@ with col2:
         <div style='background:#FDF6EC; border-radius:12px; padding:28px; text-align:center;'>
             <div style='font-size:2rem;'>🌍</div>
             <h4 style='color:#E8721C;'>Opportunity</h4>
-            <p style='color:#555; font-size:0.9rem;'>
+            <p style='color:#555; font-size:1.05rem; line-height:1.6;'>
                 MENA and Latin America have the sun but not the solar — the gap is the opportunity
             </p>
         </div>
@@ -73,7 +73,7 @@ with col3:
         <div style='background:#FDF6EC; border-radius:12px; padding:28px; text-align:center;'>
             <div style='font-size:2rem;'>🏗️</div>
             <h4 style='color:#E8721C;'>Proven Track Record</h4>
-            <p style='color:#555; font-size:0.9rem;'>
+            <p style='color:#555; font-size:1.05rem; line-height:1.6;'>
                 Canadian Solar has deployed utility-scale projects across 20+ countries
             </p>
         </div>

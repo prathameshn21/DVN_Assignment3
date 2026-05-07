@@ -60,10 +60,22 @@ st.markdown("""
     <div style='background:linear-gradient(135deg,#0D1B2A,#1A3A5C);
                 border-radius:16px; padding:48px; text-align:center;'>
         <h2 style='color:white; font-size:2rem; margin-bottom:16px;'>
-            "The sun is not the constraint.<br>The gap is investment, policy, and infrastructure."
+            "The sun is not the constraint.<br>
+            The gap is investment, policy, and infrastructure."
         </h2>
-        <p style='color:#E8A020; font-size:1.1rem;'>
+        <p style='color:#E8A020; font-size:1.1rem; margin-bottom:24px;'>
             Canadian Solar fills exactly that gap. The time to act is now.
         </p>
+        <div style='background:rgba(232,114,28,0.15); border:1px solid #E8721C;
+                    border-radius:10px; padding:16px 24px; 
+                    display:inline-block; margin-top:8px;'>
+            <span style='color:#E8A020; font-size:1.05rem; font-weight:700;'>
+                ⚠️ Delay means losing first-mover advantage.<br>
+                <span style='font-size:0.9rem; font-weight:400;'>
+                    Saudi Arabia's CAGR is +108%. Every quarter of inaction 
+                    is market share conceded to competitors.
+                </span>
+            </span>
+        </div>
     </div>
 """, unsafe_allow_html=True)

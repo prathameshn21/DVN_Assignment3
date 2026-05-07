@@ -79,12 +79,26 @@ fig1.add_trace(go.Scatter(
 ))
 fig1.update_layout(
     yaxis_type="log",
+    yaxis=dict(
+        tickvals=[0.3, 0.5, 1, 2, 5, 10, 30, 50, 100, 128],
+        ticktext=["$0.3", "$0.5", "$1", "$2", "$5", "$10", "$30", "$50", "$100", "$128"],
+        title="$/Watt (log scale)",
+        gridcolor="#F0F0F0",),
     yaxis_title="$/Watt (log scale)",
     xaxis_title="",
     template="plotly_white",
     height=350,
     margin=dict(l=40, r=20, t=10, b=40),
     showlegend=False
+)
+fig1.add_vrect(
+    x0=2008, x1=2024,
+    fillcolor="rgba(232,114,28,0.06)",
+    layer="below",
+    line_width=0,
+    annotation_text="Major cost decline era",
+    annotation_position="top left",
+    annotation_font=dict(color="#E8721C", size=10)
 )
 st.plotly_chart(fig1, use_container_width=True)
 
