@@ -24,8 +24,8 @@ st.markdown("""
             border-radius: 0 8px 8px 0;
             padding: 24px 28px;
         }
-        .card-country-green { color: #27AE60; font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
-        .card-country-red   { color: #E8721C; font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; }
+        .card-country-green { color: #27AE60; font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; }
+        .card-country-red   { color: #E8721C; font-size: 1.45rem; font-weight: 800; margin-bottom: 14px; }
         .card-big-number    { font-size: 2.8rem; font-weight: 800; color: #1A1A1A; line-height: 1; margin-bottom: 6px; }
         .card-sub           { font-size: 0.85rem; color: #777; }
         .insight-box {
@@ -43,11 +43,11 @@ st.markdown("""
             background: #FDF0E6;
             color: #E8721C;
             border-radius: 20px;
-            padding: 4px 14px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            margin-bottom: 12px;
+            padding: 10px 22px;
+            font-size: 2.2rem;
+            font-weight: 850;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -58,22 +58,29 @@ show_navigation(current=3, total=6)
 # ── Load Data ─────────────────────────────────────────────────────────────────
 opp = load_opportunity()
 
-# Pull Chile and Saudi Arabia values directly from data
-chile_row  = opp[opp["country"] == "Chile"].iloc[0]  if "Chile"        in opp["country"].values else None
-saudi_row  = opp[opp["country"] == "Saudi Arabia"].iloc[0] if "Saudi Arabia" in opp["country"].values else None
+chile_row = opp[opp["country"] == "Chile"].iloc[0] \
+    if "Chile" in opp["country"].values else None
+saudi_row = opp[opp["country"] == "Saudi Arabia"].iloc[0] \
+    if "Saudi Arabia" in opp["country"].values else None
 
-chile_share = f"{chile_row['solar_share_elec']:.1f}%" if chile_row is not None else "22.3%"
+chile_share = f"{chile_row['solar_share_elec']:.1f}" if chile_row is not None else "22.3"
 chile_pvout = f"{chile_row['pvout_kwh_kwp_day']:.2f}" if chile_row is not None else "5.36"
-saudi_share = f"{saudi_row['solar_share_elec']:.1f}%" if saudi_row is not None else "1.8%"
+saudi_share = f"{saudi_row['solar_share_elec']:.1f}" if saudi_row is not None else "1.8"
 saudi_pvout = f"{saudi_row['pvout_kwh_kwp_day']:.2f}" if saudi_row is not None else "5.16"
 
 # ── Header ────────────────────────────────────────────────────────────────────
-st.markdown("<div class='section-label'>3 &nbsp;&nbsp; THE ANOMALY</div>",
+st.markdown("<div class='section-label'>THE ANOMALY</div>",
             unsafe_allow_html=True)
-st.markdown("## If the sun is the same, why is adoption different?")
+
+st.markdown("""
+    <h2 style='font-size:2.2rem; font-weight:850; margin-bottom:10px; line-height:1.1;'>
+        If the sun is the same, why is adoption different?
+    </h2>
+""", unsafe_allow_html=True)
+
 st.markdown(
-    f"Chile has **{chile_share} solar share** at PVOUT {chile_pvout}. "
-    f"Saudi Arabia has **{saudi_share}** at PVOUT {saudi_pvout} "
+    f"Chile has **{chile_share}% solar share** at PVOUT {chile_pvout}. "
+    f"Saudi Arabia has **{saudi_share}%** at PVOUT {saudi_pvout} "
     "— nearly identical sunlight. The gap isn't physics. "
     "It's policy, investment, and infrastructure — and those barriers are now falling."
 )
@@ -82,32 +89,46 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 # ── Comparison Cards ──────────────────────────────────────────────────────────
 col_chile, col_gap, col_saudi = st.columns([5, 1, 5])
+
 with col_chile:
     st.markdown(f"""
         <div class='comparison-card-green'>
             <div class='card-country-green'>Chile (the proof)</div>
-            <div class='card-big-number'>{chile_share}</div>
-            <div style='font-size:1.4rem; font-weight:700; 
+            <div class='card-big-number'>
+                {chile_share}%
+                <span style='font-size:1rem; font-weight:400; 
+                             color:#999; margin-left:6px;'>solar share</span>
+            </div>
+            <div style='font-size:1.4rem; font-weight:700;
                         color:#27AE60; margin-top:8px;'>
                 PVOUT {chile_pvout}
+                <span style='font-size:1rem; font-weight:400;
+                             color:#999; margin-left:6px;'>kWh/kWp/day</span>
             </div>
-            <div class='card-sub'>solar share &nbsp;·&nbsp; kWh/kWp/day</div>
         </div>
     """, unsafe_allow_html=True)
+
 with col_gap:
     st.markdown(
-        "<div style='text-align:center; padding-top:36px; font-size:1.4rem; color:#ccc;'>vs</div>",
+        "<div style='text-align:center; padding-top:36px; "
+        "font-size:1.4rem; color:#ccc;'>vs</div>",
         unsafe_allow_html=True)
+
 with col_saudi:
     st.markdown(f"""
         <div class='comparison-card-red'>
             <div class='card-country-red'>Saudi Arabia (the gap)</div>
-            <div class='card-big-number'>{saudi_share}</div>
-            <div style='font-size:1.4rem; font-weight:700; 
+            <div class='card-big-number'>
+                {saudi_share}%
+                <span style='font-size:1rem; font-weight:400;
+                             color:#999; margin-left:6px;'>solar share</span>
+            </div>
+            <div style='font-size:1.4rem; font-weight:700;
                         color:#E74C3C; margin-top:8px;'>
                 PVOUT {saudi_pvout}
+                <span style='font-size:1rem; font-weight:400;
+                             color:#999; margin-left:6px;'>kWh/kWp/day</span>
             </div>
-            <div class='card-sub'>solar share &nbsp;·&nbsp; kWh/kWp/day</div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -116,52 +137,62 @@ st.markdown("<br>", unsafe_allow_html=True)
 # ── Scatter Plot ──────────────────────────────────────────────────────────────
 st.markdown("**PVOUT vs solar share — the structural gap**")
 
-# Category legend
 st.markdown("""
-    <div style='display:flex; gap:24px; margin-bottom:12px; font-size:0.85rem;'>
+    <div style='display:flex; gap:24px; margin-bottom:4px; font-size:0.85rem;'>
         <span><span style='color:#27AE60; font-size:1.1rem;'>●</span>&nbsp; Developed markets</span>
-        <span><span style='color:#E74C3C; font-size:1.1rem;'>●</span>&nbsp; MENA opportunity</span>
+        <span><span style='color:#E74C3C; font-size:1.1rem;'>●</span>&nbsp; High Growth Markets</span>
         <span><span style='color:#E8A020; font-size:1.1rem;'>●</span>&nbsp; Growth markets</span>
         <span><span style='color:#95A5A6; font-size:1.1rem;'>●</span>&nbsp; Mature / low resource</span>
     </div>
 """, unsafe_allow_html=True)
 
-# Assign categories from data
+# Bubble size legend — moved above chart
+st.markdown("""
+    <div style='font-size:0.82rem; color:#888; margin-bottom:12px;'>
+        ⬤ &nbsp; Bubble size represents
+        <strong>electricity demand (TWh)</strong> —
+        larger bubble = larger energy market
+    </div>
+""", unsafe_allow_html=True)
+
+# Category assignment
 DEVELOPED = ["Chile", "USA", "Spain", "Australia", "Italy", "Greece"]
 MENA      = ["Saudi Arabia", "Egypt", "Oman", "Kuwait", "Libya",
              "Morocco", "Tunisia", "UAE", "Jordan", "Iraq", "Yemen"]
 MATURE    = ["Germany", "Japan", "United Kingdom", "France", "Belgium"]
 
 def assign_category(country):
-    if country in DEVELOPED: return ("Developed",   "#27AE60")
-    if country in MENA:      return ("MENA",        "#E74C3C")
-    if country in MATURE:    return ("Mature",       "#95A5A6")
-    return                          ("Growth",       "#E8A020")
+    if country in DEVELOPED: return ("Developed",          "#27AE60")
+    if country in MENA:      return ("High Growth Markets", "#E74C3C")
+    if country in MATURE:    return ("Mature",              "#95A5A6")
+    return                          ("Growth",              "#E8A020")
 
-# Only plot countries that have both pvout and solar_share data
 plot_df = opp.dropna(subset=["pvout_kwh_kwp_day", "solar_share_elec"]).copy()
 plot_df[["category", "color"]] = plot_df["country"].apply(
     lambda c: pd.Series(assign_category(c))
 )
 
-# Scale bubble size by electricity demand
 max_demand = plot_df["electricity_demand"].max()
 plot_df["bubble_size"] = (
     plot_df["electricity_demand"].fillna(plot_df["electricity_demand"].median())
     / max_demand * 50 + 8
 ).clip(8, 55)
 
-# Key countries to always label
 LABEL_COUNTRIES = {
     "Chile", "Saudi Arabia", "Egypt", "Oman", "Colombia",
     "Pakistan", "Germany", "USA", "Spain", "Australia",
     "Japan", "Morocco", "Kuwait", "Tunisia"
 }
 
+HIGH_CAGR_THRESHOLD = 0.60
+
 fig = go.Figure()
 
 for _, row in plot_df.iterrows():
-    show_label = row["country"] in LABEL_COUNTRIES
+    show_label  = row["country"] in LABEL_COUNTRIES
+    cagr_val    = row.get("solar_cagr_5yr", 0) or 0
+    is_high_cagr = cagr_val >= HIGH_CAGR_THRESHOLD
+
     fig.add_trace(go.Scatter(
         x=[row["pvout_kwh_kwp_day"]],
         y=[row["solar_share_elec"]],
@@ -169,25 +200,29 @@ for _, row in plot_df.iterrows():
         marker=dict(
             size=row["bubble_size"],
             color=row["color"],
-            opacity=0.80 if show_label else 0.35,
-            line=dict(width=1.5 if show_label else 0.5,
-                      color="white")
+            opacity=0.90 if (show_label or is_high_cagr) else 0.35,
+            # CHANGE 5 — Gold border for 60%+ CAGR, white for others
+            line=dict(
+                width=3   if is_high_cagr else (1.5 if show_label else 0.5),
+                color="#FFD700" if is_high_cagr else "white"
+            )
         ),
         text=[row["country"]] if show_label else [""],
         textposition="top center",
-        textfont=dict(size=10, color="#333"),
+        # CHANGE 2 — Slightly larger label font
+        textfont=dict(size=11, color="#333"),
         hovertemplate=(
             f"<b>{row['country']}</b><br>"
             f"PVOUT: {row['pvout_kwh_kwp_day']:.2f} kWh/kWp/day<br>"
             f"Solar Share: {row['solar_share_elec']:.1f}%<br>"
-            f"5yr CAGR: {row['solar_cagr_5yr']*100:.0f}%<br>"
+            f"5yr CAGR: {cagr_val*100:.0f}%<br>"
             f"Category: {row['category']}<extra></extra>"
         ),
         showlegend=False,
         name=row["country"]
     ))
 
-# Vertical reference line at PVOUT 5.0
+# Vertical reference line
 fig.add_vline(
     x=5.0, line_dash="dash",
     line_color="#DDDDDD", line_width=1.5,
@@ -196,33 +231,33 @@ fig.add_vline(
     annotation_font=dict(color="#AAAAAA", size=10)
 )
 
-# Chile callout annotation
+# Chile annotation
 if chile_row is not None:
     fig.add_annotation(
         x=float(chile_row["pvout_kwh_kwp_day"]),
         y=float(chile_row["solar_share_elec"]),
-        text=f"<b>Chile</b> — {chile_share}<br>Same sun as MENA",
-        showarrow=True,
-        arrowhead=2,
+        text=f"<b>Chile</b> — {chile_share}%<br>Same sun as MENA",
+        showarrow=True, arrowhead=2,
         arrowcolor="#27AE60",
         ax=-130, ay=-50,
         font=dict(color="#27AE60", size=11),
         bgcolor="white",
         bordercolor="#27AE60",
-        borderwidth=1,
-        borderpad=6
+        borderwidth=1, borderpad=6
     )
 
 fig.update_layout(
     template="plotly_white",
     height=500,
     xaxis=dict(
-        title="PVOUT (kWh/kWp/day) →",
+        # CHANGE 6 — Horizontal axis title
+        title=dict(text="PVOUT (kWh/kWp/day)", standoff=15),
         showgrid=True, gridcolor="#F5F5F5",
         zeroline=False,
     ),
     yaxis=dict(
-        title="↑ Solar share of electricity (%)",
+        # CHANGE 6 — Horizontal Y axis title, remove arrow prefix
+        title=dict(text="Solar share of electricity (%)", standoff=15),
         showgrid=True, gridcolor="#F5F5F5",
         zeroline=True, zerolinecolor="#EEEEEE"
     ),
@@ -231,23 +266,16 @@ fig.update_layout(
     paper_bgcolor="white",
     hovermode="closest"
 )
-st.markdown("""
-    <div style='font-size:0.82rem; color:#888; margin-bottom:8px;'>
-        ⬤ &nbsp; Bubble size represents 
-        <strong>electricity demand (TWh)</strong> — 
-        larger bubble = larger energy market
-    </div>
-""", unsafe_allow_html=True)
 
 st.plotly_chart(fig, use_container_width=True)
 
 # ── Insight Box ───────────────────────────────────────────────────────────────
 st.markdown("""
     <div class='insight-box'>
-        <div style='font-size:1.2rem; font-weight:800; color:#1A1A1A; 
+        <div style='font-size:1.2rem; font-weight:800; color:#1A1A1A;
                     margin-bottom:10px; line-height:1.5;'>
-            The bottom-right quadrant — high sun, low adoption —
-            is where opportunity lives.
+            Countries with fast growing demand for solar, high sun,
+            low adoption — is where opportunity lives.
         </div>
         These countries can replicate Chile's trajectory now that
         module prices are universal at <strong>$0.26/W</strong>.

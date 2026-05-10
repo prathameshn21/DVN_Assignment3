@@ -206,14 +206,12 @@ st.markdown(
     <div class='hero'>
         <div class='eyebrow'>Canadian Solar Strategic Brief</div>
         <div class='hero-title'>Chasing the Sun</div>
-        <div class='hero-question'>Solar is already cheap. The real question is where expansion will pay off first.</div>
+        <div class='hero-question'>A new economical Age of Solar. The next horizon to chase.</div>
         <div class='hero-sub'>
             This dashboard is built for the Vice President of Strategy & Innovation at Canadian Solar.
             It uses global solar cost, generation, adoption-gap, and market-opportunity data to narrow
             the next set of utility-scale expansion markets.
         </div>
-        <div class='hero-note'>Stakeholder: Vice President of Strategy & Innovation at Canadian Solar</div>
-    </div>
     """,
     unsafe_allow_html=True,
 )
@@ -235,9 +233,9 @@ with c1:
         f"""
         <div class='evidence-card'>
             <div class='evidence-value'>{price_drop:.1f}%</div>
-            <div class='evidence-label'>PV price decline</div>
+            <div class='evidence-label'>Photovoltaic Module Price Decline – Since 1975</div>
             <div class='evidence-body'>
-                Module prices have collapsed since 1975. Cost is no longer the main reason markets fail to scale solar.
+                Hardware cost is no longer the reason for using solar at scale.
             </div>
         </div>
         """,
@@ -248,9 +246,9 @@ with c2:
         f"""
         <div class='evidence-card'>
             <div class='evidence-value'>{global_2024:,.0f} TWh</div>
-            <div class='evidence-label'>Global solar generation in 2024</div>
+            <div class='evidence-label'>Global Solar Generation – 12x from 2015 to 2024</div>
             <div class='evidence-body'>
-                Solar output has already reached system-scale relevance, growing {growth_multiple:.1f}x since 2015.
+                The world is rapidly adopting solar at a system-wide scale.
             </div>
         </div>
         """,
@@ -260,10 +258,10 @@ with c3:
     st.markdown(
         f"""
         <div class='evidence-card'>
-            <div class='evidence-value'>{chile_share:.1f}% vs {saudi_share:.1f}%</div>
-            <div class='evidence-label'>Chile vs Saudi solar share</div>
+            <div class='evidence-value'>22.3% Solar Share in Chile</div>
+            <div class='evidence-label'>The precedent has been set in Chile</div>
             <div class='evidence-body'>
-                Strong solar resource does not guarantee adoption. The opportunity sits where potential and deployment diverge.
+                Where potential and opportunities meet, is where the horizon is.
             </div>
         </div>
         """,
@@ -274,11 +272,9 @@ st.markdown("<br>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class='thesis-box'>
-        <div class='thesis-label'>Thesis</div>
+        <div class='thesis-label'>What Does This Mean?</div>
         <div class='thesis-text'>
-            If cost is no longer the bottleneck, market selection becomes the strategic advantage.
-            This story is designed to identify where Canadian Solar can convert that advantage into
-            real expansion.
+            Module cost is no longer the bottleneck. The world is ready and asking for utility scale Solar. The question where next for Candian Solar?
         </div>
     </div>
     """,
@@ -286,70 +282,3 @@ st.markdown(
 )
 
 st.markdown("<br>", unsafe_allow_html=True)
-st.markdown("<div class='section-kicker'>Story Logic</div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'>The dashboard makes one argument in three moves.</div>", unsafe_allow_html=True)
-
-p1, p2, p3 = st.columns(3)
-path_cards = [
-    (
-        "Move 1",
-        "Remove the old barrier",
-        "The first pages establish that solar has already crossed the economic threshold.",
-    ),
-    (
-        "Move 2",
-        "Find the adoption gap",
-        "The anomaly and map pages show where strong conditions still have not turned into strong adoption.",
-    ),
-    (
-        "Move 3",
-        "Narrow the shortlist",
-        "The deep-dive and recommendation pages focus the argument on the markets most worth acting on next.",
-    ),
-]
-
-for col, (step, title, body) in zip((p1, p2, p3), path_cards):
-    with col:
-        st.markdown(
-            f"""
-            <div class='path-card'>
-                <div class='path-step'>{step}</div>
-                <div class='path-title'>{title}</div>
-                <div class='path-body'>{body}</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-g1, g2 = st.columns([1.45, 1])
-with g1:
-    st.markdown(
-        """
-        <div class='shortlist-box'>
-            <div class='shortlist-title'>What the user should understand before entering page 1</div>
-            <div class='shortlist-copy'>
-                This is not a generic energy dashboard. It is a persuasive strategic brief:
-                why now, where the gap is, and which markets Canadian Solar should evaluate first.
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-with g2:
-    st.markdown(
-        """
-        <div class='shortlist-box'>
-            <div class='shortlist-title'>Current focus markets</div>
-            <div class='shortlist-copy'>
-                The final chapters examine four markets in detail before landing on the recommendation.
-            </div>
-            <span class='pill'>Saudi Arabia</span>
-            <span class='pill'>Egypt</span>
-            <span class='pill'>Colombia</span>
-            <span class='pill'>Pakistan</span>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
