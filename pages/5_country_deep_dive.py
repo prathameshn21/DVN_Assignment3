@@ -170,26 +170,77 @@ total_countries = len(opp_sorted)
 # ── Metric Tiles ──────────────────────────────────────────────────────────────
 m1, m2, m3, m4 = st.columns(4)
 
-m1.metric(
-    "Solar Share",
-    f"{row['solar_share_elec']:.1f}%",
-    f"Rank #{rank} of {total_countries}"
-)
-m2.metric(
-    "PVOUT",
-    f"{row['pvout_kwh_kwp_day']:.2f} kWh/kWp/day",
-    f"Rank #{opp_sorted[opp_sorted['country']==selected].index[0]+1} of {total_countries}"
-)
-m3.metric(
-    "5yr CAGR",
-    f"{row['solar_cagr_5yr']*100:.0f}% · 2019–2024",
-    "Growth rate"
-)
-m4.metric(
-    "Installed GW",
-    f"{row['installed_capacity_gw']:.1f} GW · 2024",
-    "Installed capacity"
-)
+# Shared card style to match st.metric appearance exactly
+METRIC_STYLE = """
+    padding: 4px 0;
+"""
+LABEL_STYLE = "font-size:0.85rem; color:#666; margin-bottom:8px;"
+VALUE_STYLE = "font-size:2.2rem; font-weight:400; color:#1A1A1A;"  # ← 400 = not bold
+SUFFIX_STYLE = "font-size:1.4rem; color:#888; margin-left:4px;"
+DELTA_STYLE = "font-size:0.85rem; color:#27AE60; margin-top:4px;"
+
+# Solar Share
+with m1:
+    st.markdown(f"""
+        <div style='{METRIC_STYLE}'>
+            <div style='{LABEL_STYLE}'>Solar Share</div>
+            <div>
+                <span style='{VALUE_STYLE}'>
+                    {row['solar_share_elec']:.1f}%
+                </span>
+            </div>
+            <div style='{DELTA_STYLE}'>
+                ↑ Rank #{rank} of {total_countries}
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+# PVOUT
+with m2:
+    st.markdown(f"""
+        <div style='{METRIC_STYLE}'>
+            <div style='{LABEL_STYLE}'>PVOUT</div>
+            <div>
+                <span style='{VALUE_STYLE}'>
+                    {row['pvout_kwh_kwp_day']:.2f}
+                </span>
+                <span style='{SUFFIX_STYLE}'>kWh/kWp/day</span>
+            </div>
+            <div style='{DELTA_STYLE}'>
+                ↑ Rank #{rank} of {total_countries}
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+# 5yr CAGR
+with m3:
+    st.markdown(f"""
+        <div style='{METRIC_STYLE}'>
+            <div style='{LABEL_STYLE}'>5yr CAGR</div>
+            <div>
+                <span style='{VALUE_STYLE}'>
+                    {row['solar_cagr_5yr']*100:.0f}%
+                </span>
+                <span style='{SUFFIX_STYLE}'>2019–2024</span>
+            </div>
+            <div style='{DELTA_STYLE}'>↑ Growth rate</div>
+        </div>
+    """, unsafe_allow_html=True)
+
+# Installed GW
+with m4:
+    st.markdown(f"""
+        <div style='{METRIC_STYLE}'>
+            <div style='{LABEL_STYLE}'>Installed GW</div>
+            <div>
+                <span style='{VALUE_STYLE}'>
+                    {row['installed_capacity_gw']:.1f} GW
+                </span>
+                <span style='{SUFFIX_STYLE}'>2024</span>
+            </div>
+            <div style='{DELTA_STYLE}'>↑ Installed capacity</div>
+        </div>
+    """, unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -259,12 +310,50 @@ avg_cost_per_gw_usd = 800
 market_value_usd    = required_gw * avg_cost_per_gw_usd
 
 r1, r2, r3, r4 = st.columns(4)
-r1.metric("Additional Generation Needed", f"{additional_twh:.1f} TWh")
-r2.metric("New Capacity Required",        f"{required_gw:.1f} GW")
-r3.metric("Target Solar Share",           f"{target_share}%")
-# CHANGE 6 — New $ market size tile
-r4.metric("Est. Market Opportunity",      f"${market_value_usd:,.0f}M USD")
 
+with r1:
+    st.markdown(f"""
+        <div style='{METRIC_STYLE}'>
+            <div style='{LABEL_STYLE}'>Additional Generation Needed</div>
+            <div>
+                <span style='{VALUE_STYLE}'>{additional_twh:.1f}</span>
+                <span style='{SUFFIX_STYLE}'>TWh</span>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+with r2:
+    st.markdown(f"""
+        <div style='{METRIC_STYLE}'>
+            <div style='{LABEL_STYLE}'>New Capacity Required</div>
+            <div>
+                <span style='{VALUE_STYLE}'>{required_gw:.1f}</span>
+                <span style='{SUFFIX_STYLE}'>GW</span>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+with r3:
+    st.markdown(f"""
+        <div style='{METRIC_STYLE}'>
+            <div style='{LABEL_STYLE}'>Target Solar Share</div>
+            <div>
+                <span style='{VALUE_STYLE}'>{target_share}</span>
+                <span style='{SUFFIX_STYLE}'>%</span>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+with r4:
+    st.markdown(f"""
+        <div style='{METRIC_STYLE}'>
+            <div style='{LABEL_STYLE}'>Est. Market Opportunity</div>
+            <div>
+                <span style='{VALUE_STYLE}'>${market_value_usd:,.0f}M</span>
+                <span style='{SUFFIX_STYLE}'>USD</span>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
 st.success(
     f"To reach **{target_share}% solar share** in {selected}, Canadian Solar would need to deploy "
     f"approximately **{required_gw:.1f} GW** of new capacity — generating an additional "

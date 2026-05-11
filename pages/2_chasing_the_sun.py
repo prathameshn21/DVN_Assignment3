@@ -9,12 +9,8 @@ st.set_page_config(page_title="Chasing The Sun", layout="wide",
 st.markdown("""
     <style>
         [data-testid="stSidebar"] {display: none;}
-        [data-testid="stAppViewContainer"] {
-            background-color: #0D1B2A;
-        }
-        [data-testid="stHeader"] {
-            background-color: #0D1B2A;
-        }
+        [data-testid="stAppViewContainer"] { background-color: #0D1B2A; }
+        [data-testid="stHeader"]           { background-color: #0D1B2A; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -47,12 +43,20 @@ st.markdown("""
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ── Three Pillars ─────────────────────────────────────────────────────────────
+# FIX — Use min-height instead of height:100% so all 3 cards are same height
+CARD_STYLE = """
+    background:#FDF6EC;
+    border-radius:12px;
+    padding:28px 32px;
+    text-align:left;
+    min-height:200px;
+"""
+
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.markdown("""
-        <div style='background:#FDF6EC; border-radius:12px; padding:28px 32px;
-                    text-align:left; height:100%;'>
+    st.markdown(f"""
+        <div style='{CARD_STYLE}'>
             <h4 style='color:#E8721C; margin-top:0; margin-bottom:12px;'>
                 Price
             </h4>
@@ -63,9 +67,8 @@ with col1:
     """, unsafe_allow_html=True)
 
 with col2:
-    st.markdown("""
-        <div style='background:#FDF6EC; border-radius:12px; padding:28px 32px;
-                    text-align:left; height:100%;'>
+    st.markdown(f"""
+        <div style='{CARD_STYLE}'>
             <h4 style='color:#E8721C; margin-top:0; margin-bottom:12px;'>
                 Opportunity
             </h4>
@@ -77,9 +80,8 @@ with col2:
     """, unsafe_allow_html=True)
 
 with col3:
-    st.markdown("""
-        <div style='background:#FDF6EC; border-radius:12px; padding:28px 32px;
-                    text-align:left; height:100%;'>
+    st.markdown(f"""
+        <div style='{CARD_STYLE}'>
             <h4 style='color:#E8721C; margin-top:0; margin-bottom:12px;'>
                 Proven Track Record
             </h4>
