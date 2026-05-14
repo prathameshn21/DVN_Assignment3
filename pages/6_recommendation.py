@@ -84,23 +84,20 @@ for col, c in zip(cols, countries):
         st.markdown(f"""
             <div style='background:#FDF6EC; border:2px solid #F0D9B5;
                         border-radius:12px; padding:24px; text-align:center;
-                        height:100%;'>
-                <div style='font-size:2rem; font-weight:800; color:#1A1A1A;
-                            letter-spacing:2px; margin-bottom:4px;'>
-                    {c['iso']}
+                        min-height:220px;'>
+                <div style='font-size:1.6rem; font-weight:800; color:#1A1A1A;
+                            letter-spacing:1px; margin-bottom:8px;'>
+                    {c['name']}
                 </div>
                 <div style='background:#E8721C; color:white; border-radius:20px;
                             padding:2px 14px; display:inline-block; font-size:0.8rem;
                             font-weight:700; margin:8px 0;'>
                     #{c['rank']} Priority
                 </div>
-                <h3 style='margin:8px 0; color:#1A1A1A; font-size:1rem;'>
-                    {c['name']}
-                </h3>
-                <p style='color:#666; font-size:0.82rem; line-height:1.5;'>
+                <p style='color:#666; font-size:0.82rem; line-height:1.5; margin-top:12px;'>
                     {c['why']}
                 </p>
-                <div style='margin-top:12px; font-size:0.78rem; color:#999;'>
+                <div style='margin-top:12px; font-size:0.85rem; color:#999;'>
                     Opportunity Score:
                     <strong style='color:#E8721C;'>{c['score']}</strong>
                 </div>
