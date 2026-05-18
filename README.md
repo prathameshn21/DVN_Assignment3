@@ -7,6 +7,9 @@
 > opportunities for Canadian Solar Inc.
 
 ---
+## The app is live at:
+https://solar-expansion.streamlit.app/
+
 
 ## 📋 Project Overview
 
